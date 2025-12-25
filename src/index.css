@@ -1,10 +1,11 @@
 @import "tailwindcss";
 
-/* custom animation (safe) */
+/* Custom animation for arrows / flow indicators */
 @keyframes flow {
   from {
     transform: translateX(-100%);
   }
+
   to {
     transform: translateX(100%);
   }
