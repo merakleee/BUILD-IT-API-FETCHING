@@ -1,0 +1,15 @@
+@import "tailwindcss";
+
+/* custom animation (safe) */
+@keyframes flow {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+
+.animate-flow {
+  animation: flow 1.8s linear infinite;
+}
