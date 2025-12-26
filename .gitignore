@@ -12,6 +12,10 @@ dist
 dist-ssr
 *.local
 
+# Animations/assets (keep large media out of git)
+src/Animations/*.gif
+src/Animations/*.png
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

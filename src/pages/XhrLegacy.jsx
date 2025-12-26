@@ -91,8 +91,8 @@ export default function XhrLegacy() {
                         <button
                             onClick={() => setActiveMethod("xhr")}
                             className={`px-8 py-3 rounded-lg font-semibold transition-all duration-200 ${activeMethod === "xhr"
-                                    ? "bg-red-600 text-white shadow-lg"
-                                    : "text-zinc-400 hover:text-zinc-200"
+                                ? "bg-red-600 text-white shadow-lg"
+                                : "text-zinc-400 hover:text-zinc-200"
                                 }`}
                         >
                             XMLHttpRequest (Legacy)
@@ -100,8 +100,8 @@ export default function XhrLegacy() {
                         <button
                             onClick={() => setActiveMethod("fetch")}
                             className={`px-8 py-3 rounded-lg font-semibold transition-all duration-200 ${activeMethod === "fetch"
-                                    ? "bg-indigo-600 text-white shadow-lg"
-                                    : "text-zinc-400 hover:text-zinc-200"
+                                ? "bg-indigo-600 text-white shadow-lg"
+                                : "text-zinc-400 hover:text-zinc-200"
                                 }`}
                         >
                             fetch() (Modern)
@@ -113,8 +113,8 @@ export default function XhrLegacy() {
                 <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 mb-6">
                     {/* XHR Code */}
                     <div className={`bg-zinc-900 rounded-xl p-6 border-2 transition-all duration-300 shadow-2xl ${activeMethod === "xhr"
-                            ? "border-red-500 shadow-red-500/20"
-                            : "border-zinc-800"
+                        ? "border-red-500 shadow-red-500/20"
+                        : "border-zinc-800"
                         }`}>
                         <div className="flex items-center justify-between mb-4">
                             <h3 className="font-semibold text-lg">XMLHttpRequest (Old Way)</h3>
@@ -172,8 +172,8 @@ xhr.send();`}
 
                     {/* Fetch Code */}
                     <div className={`bg-zinc-900 rounded-xl p-6 border-2 transition-all duration-300 shadow-2xl ${activeMethod === "fetch"
-                            ? "border-indigo-500 shadow-indigo-500/20"
-                            : "border-zinc-800"
+                        ? "border-indigo-500 shadow-indigo-500/20"
+                        : "border-zinc-800"
                         }`}>
                         <div className="flex items-center justify-between mb-4">
                             <h3 className="font-semibold text-lg">fetch() (Modern Way)</h3>
@@ -371,8 +371,8 @@ xhr.send();`}
                                     <div
                                         key={idx}
                                         className={`p-2 rounded animate-fade-in ${log.type === "error" ? "bg-red-950/30 text-red-400 border-l-2 border-red-500" :
-                                                log.type === "success" ? "bg-green-950/30 text-green-400 border-l-2 border-green-500" :
-                                                    "bg-zinc-800 text-zinc-300"
+                                            log.type === "success" ? "bg-green-950/30 text-green-400 border-l-2 border-green-500" :
+                                                "bg-zinc-800 text-zinc-300"
                                             }`}
                                     >
                                         {log.msg}
@@ -473,10 +473,10 @@ function FlowBox({ label, active, completed }) {
     return (
         <div
             className={`flex-1 h-16 rounded-lg flex items-center justify-center border-2 text-xs font-medium transition-all duration-500 ${completed
-                    ? "border-green-500 bg-green-950/20 text-green-400"
-                    : active
-                        ? "border-indigo-400 bg-indigo-950/20 text-indigo-400 shadow-lg shadow-indigo-500/20 scale-105"
-                        : "border-zinc-700 text-zinc-500 bg-zinc-950"
+                ? "border-green-500 bg-green-950/20 text-green-400"
+                : active
+                    ? "border-indigo-400 bg-indigo-950/20 text-indigo-400 shadow-lg shadow-indigo-500/20 scale-105"
+                    : "border-zinc-700 text-zinc-500 bg-zinc-950"
                 }`}
         >
             {label}
