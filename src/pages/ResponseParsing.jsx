@@ -73,7 +73,6 @@ export default function ResponseParsing() {
                     setRawPreview(preview);
                     addLog(`Data size: ${size} bytes`, "info");
                 }, 2400);
-
             } else if (selectedMode === "text") {
                 const txt = await response.text();
                 const size = new Blob([txt]).size;
@@ -88,7 +87,6 @@ export default function ResponseParsing() {
                     setRawPreview(txt);
                     addLog(`Data size: ${size} bytes`, "info");
                 }, 2400);
-
             } else {
                 // blob demo - get JSON first to extract image URL
                 const data = await response.json();
@@ -116,7 +114,6 @@ export default function ResponseParsing() {
                     setImageUrl(objectUrl);
                 }, 2400);
             }
-
         } catch (error) {
             console.error("Parsing error:", error);
             setStatus("error");
@@ -236,9 +233,32 @@ img.src = url; // Display image`}
                         </div>
                     </div>
 
-                    {/* Visual Flow */}
+                    {/* Visual Flow + Controls */}
                     <div className="bg-zinc-900 rounded-xl p-6 border border-zinc-800 shadow-2xl">
-                        <h3 className="font-semibold text-lg mb-6">Parsing Decision Flow</h3>
+                        <div className="flex items-center justify-between mb-6">
+                            <h3 className="font-semibold text-lg">Parsing Decision Flow</h3>
+                        </div>
+
+                        {/* Run + Reset controls (no emojis, shorter height) */}
+                        <div className="flex gap-4 mb-6 p-3 bg-black/30 rounded-xl border border-zinc-700">
+                            <button
+                                onClick={() => runParse(mode)}
+                                disabled={status === "loading"}
+                                className="flex-1 px-6 py-3 bg-gradient-to-r from-indigo-600 to-indigo-700 hover:from-indigo-500 hover:to-indigo-600 disabled:from-zinc-700 disabled:to-zinc-600 disabled:cursor-not-allowed rounded-lg font-semibold text-sm shadow-lg hover:shadow-indigo-500/25 hover:scale-[1.01] transition-all duration-200 border border-indigo-500/40 active:scale-[0.99] flex flex-col items-start justify-center"
+                            >
+                                <span className="text-xs uppercase tracking-wide opacity-80 mb-1">
+                                    Run
+                                </span>
+                                <span className="font-mono text-sm">.{mode}()</span>
+                            </button>
+
+                            <button
+                                onClick={reset}
+                                className="w-32 px-6 py-3 bg-gradient-to-r from-zinc-700 to-zinc-600 hover:from-zinc-600 hover:to-zinc-500 rounded-lg font-semibold text-sm shadow-md hover:shadow-zinc-500/25 hover:scale-[1.01] transition-all duration-200 border border-zinc-600/50 active:scale-[0.99] flex items-center justify-center"
+                            >
+                                Reset
+                            </button>
+                        </div>
 
                         <div className="space-y-6">
                             {/* Step 1: Receive Response */}
@@ -351,7 +371,9 @@ img.src = url; // Display image`}
                         <h3 className="font-semibold text-lg mb-4 flex items-center gap-2">
                             <span>Console Logs</span>
                             {logs.length > 0 && (
-                                <span className="text-xs bg-zinc-700 px-2 py-1 rounded">{logs.length}</span>
+                                <span className="text-xs bg-zinc-700 px-2 py-1 rounded">
+                                    {logs.length}
+                                </span>
                             )}
                         </h3>
 
@@ -364,9 +386,11 @@ img.src = url; // Display image`}
                                 logs.map((log, idx) => (
                                     <div
                                         key={idx}
-                                        className={`p-2 rounded animate-fade-in ${log.type === "error" ? "bg-red-950/30 text-red-400 border-l-2 border-red-500" :
-                                                log.type === "success" ? "bg-green-950/30 text-green-400 border-l-2 border-green-500" :
-                                                    "bg-zinc-800 text-zinc-300"
+                                        className={`p-2 rounded animate-fade-in ${log.type === "error"
+                                                ? "bg-red-950/30 text-red-400 border-l-2 border-red-500"
+                                                : log.type === "success"
+                                                    ? "bg-green-950/30 text-green-400 border-l-2 border-green-500"
+                                                    : "bg-zinc-800 text-zinc-300"
                                             }`}
                                     >
                                         {log.msg}
@@ -424,22 +448,6 @@ img.src = url; // Display image`}
                                     </p>
                                 </div>
                             )}
-                        </div>
-
-                        <div className="mt-4 flex gap-3">
-                            <button
-                                onClick={() => runParse(mode)}
-                                disabled={status === "loading"}
-                                className="flex-1 px-6 py-3 bg-indigo-600 hover:bg-indigo-500 disabled:bg-zinc-700 disabled:cursor-not-allowed rounded-lg font-semibold transition-all duration-200 hover:scale-105 disabled:scale-100"
-                            >
-                                {status === "loading" ? "Running..." : `Run .${mode}() Demo`}
-                            </button>
-                            <button
-                                onClick={reset}
-                                className="px-6 py-3 bg-zinc-700 hover:bg-zinc-600 rounded-lg font-semibold transition-all duration-200"
-                            >
-                                Reset
-                            </button>
                         </div>
                     </div>
                 </div>
@@ -518,20 +526,20 @@ img.src = url; // Display image`}
             </div>
 
             <style jsx>{`
-                @keyframes fade-in {
-                    from {
-                        opacity: 0;
-                        transform: translateY(10px);
-                    }
-                    to {
-                        opacity: 1;
-                        transform: translateY(0);
-                    }
-                }
-                .animate-fade-in {
-                    animation: fade-in 0.3s ease-out;
-                }
-            `}</style>
+        @keyframes fade-in {
+          from {
+            opacity: 0;
+            transform: translateY(10px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        .animate-fade-in {
+          animation: fade-in 0.3s ease-out;
+        }
+      `}</style>
         </div>
     );
 }
@@ -567,10 +575,12 @@ function ParsingMethodCard({ method, active, onClick, icon, title, description, 
 
 function MethodExample({ title, active, code, description }) {
     return (
-        <div className={`border rounded-lg p-4 transition-all duration-300 ${active
-                ? "border-indigo-500 bg-indigo-950/20"
-                : "border-zinc-700 bg-zinc-950"
-            }`}>
+        <div
+            className={`border rounded-lg p-4 transition-all duration-300 ${active
+                    ? "border-indigo-500 bg-indigo-950/20"
+                    : "border-zinc-700 bg-zinc-950"
+                }`}
+        >
             <p className="text-xs font-semibold mb-2 text-zinc-300">{title}</p>
             <pre className="bg-black rounded p-3 text-xs text-zinc-200 mb-2 overflow-auto">
                 {code}
@@ -599,8 +609,10 @@ function FlowBox({ label, active, completed, highlight }) {
 
 function FlowArrow({ active }) {
     return (
-        <span className={`text-lg transition-colors duration-500 ${active ? "text-indigo-400" : "text-zinc-700"
-            }`}>
+        <span
+            className={`text-lg transition-colors duration-500 ${active ? "text-indigo-400" : "text-zinc-700"
+                }`}
+        >
             →
         </span>
     );

@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
-import FetchBasics from "./pages/FetchBasics";
 import XhrLegacy from "./pages/XhrLegacy";
 import PromisesAsync from "./pages/PromisesAsync";
 import RequestConfig from "./pages/RequestConfig";
@@ -20,14 +19,6 @@ const TABS = [
     icon: "🌐",
     description: "Compare Fetch, Axios, React Query and more",
     category: "Overview",
-  },
-  {
-    id: "fetch",
-    label: "fetch()",
-    component: FetchBasics,
-    icon: "→",
-    description: "Modern HTTP requests",
-    category: "Basics",
   },
   {
     id: "xhr",
@@ -167,8 +158,8 @@ export default function App() {
                   key={tab.id}
                   onClick={() => setActive(tab.id)}
                   className={`w-full text-left rounded-lg transition-all duration-200 ${active === tab.id
-                      ? "bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-lg shadow-indigo-500/20"
-                      : "text-zinc-300 hover:bg-zinc-800 hover:text-white"
+                    ? "bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-lg shadow-indigo-500/20"
+                    : "text-zinc-300 hover:bg-zinc-800 hover:text-white"
                     }`}
                 >
                   {!sidebarCollapsed ? (
