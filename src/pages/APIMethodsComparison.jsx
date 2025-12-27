@@ -195,7 +195,7 @@ export default function APIMethodsComparison() {
         }
         .flow-item { animation: flow 2s infinite; }
       `}</style>
-      
+
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-10">
@@ -216,11 +216,10 @@ export default function APIMethodsComparison() {
             <button
               key={method.id}
               onClick={() => setActiveMethod(method.id)}
-              className={`px-5 py-3 rounded-lg font-semibold transition-all text-white text-sm ${
-                activeMethod === method.id
+              className={`px-5 py-3 rounded-lg font-semibold transition-all text-white text-sm ${activeMethod === method.id
                   ? `bg-gradient-to-r ${method.bg} shadow-lg scale-105`
                   : "bg-zinc-800 text-zinc-300 hover:bg-zinc-700"
-              }`}
+                }`}
             >
               <span className="text-lg mr-2">{method.emoji}</span>{method.label}
             </button>
@@ -240,7 +239,7 @@ export default function APIMethodsComparison() {
               <p className="text-zinc-300 mb-6 text-sm leading-relaxed">
                 {methodDescriptions[activeMethod].description}
               </p>
-              
+
               <h4 className="font-semibold text-indigo-400 mb-4">Key Features:</h4>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {methodDescriptions[activeMethod].features.map((feature, idx) => (
@@ -261,7 +260,7 @@ export default function APIMethodsComparison() {
               {activeMethod === "native" && (
                 <>
                   <pre className="bg-gradient-to-b from-zinc-950 to-zinc-900 rounded-xl p-4 text-xs text-zinc-100 overflow-auto mb-4 max-h-60 border border-zinc-800 shadow-inner font-mono">
-{`// native-fetch
+                    {`// native-fetch
 async function fetchCat() {
   const response = await fetch(url);
   if (!response.ok) throw new Error();
@@ -282,7 +281,7 @@ async function fetchCat() {
               {activeMethod === "axios" && (
                 <>
                   <pre className="bg-gradient-to-b from-zinc-950 to-zinc-900 rounded-xl p-4 text-xs text-zinc-100 overflow-auto mb-4 max-h-60 border border-zinc-800 shadow-inner font-mono">
-{`// axios
+                    {`// axios
 // npm install axios
 async function fetchCat() {
   const response = await axios.get(url);
@@ -302,7 +301,7 @@ async function fetchCat() {
               {activeMethod === "axios-improved" && (
                 <>
                   <pre className="bg-gradient-to-b from-zinc-950 to-zinc-900 rounded-xl p-4 text-xs text-zinc-100 overflow-auto mb-4 max-h-60 border border-zinc-800 shadow-inner font-mono">
-{`// axios-improved
+                    {`// axios-improved
 const api = axios.create({ ... });
 
 api.interceptors.request.use(
@@ -326,7 +325,7 @@ api.interceptors.response.use(
               {activeMethod === "react-query" && (
                 <>
                   <pre className="bg-gradient-to-b from-zinc-950 to-zinc-900 rounded-xl p-4 text-xs text-zinc-100 overflow-auto mb-4 max-h-60 border border-zinc-800 shadow-inner font-mono">
-{`// react-query
+                    {`// react-query
 // npm install @tanstack/react-query
 const { data, isLoading } = useQuery({
   queryKey: ["cat"],
