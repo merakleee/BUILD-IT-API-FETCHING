@@ -5,32 +5,6 @@
 > **Goal:** Deep theoretical understanding of API fetching systems and how modern frontend applications handle data correctly, efficiently, and predictably
 
 ---
-##  Setup Instructions
-
-Follow these steps to get the project running locally:
-
-### 1. Clone the repository
-Open your terminal and run the following command to clone the project:
-```bash
-git clone [https://github.com/moncefy/BUILD-IT-API-FETCHING.git](https://github.com/moncefy/BUILD-IT-API-FETCHING.git)
-```
-### 2. Navigate to the project folder
-```bash
-cd BUILD-IT-API-FETCHING
-```
-### 3. Install dependencies
-```bash
-npm install // When you run npm install , it looks at your package.json file and downloads every library listed there.
-```
-### 4. Start the development server
-```bash
-npm run dev 
-```
-### Or you can simply try the hosted version 
-```bash
-visit: https://build-it-api-fetching.netlify.app/
-```
----
 
 ## Table of Contents
 - Introduction
@@ -69,7 +43,17 @@ visit: https://build-it-api-fetching.netlify.app/
   - Polling & refetch intervals
   - Optimistic updates
   - Mutation handling & side effects
-
+- Implementation Details
+  - Architectural Approach
+  - Unified Execution Model
+  - Interactive Comparison Design
+  - State & Lifecycle Control
+  - Error Handling Strategy
+  - React `use()` Hook Integration
+  - Visual Traceability
+  - Summary
+- Setup Instructions
+   
 ---
 
 ## Introduction
@@ -1290,7 +1274,7 @@ It’s about controlling time, failure, consistency, and user perception.
 ---
 
 
-# Implementation Details
+## Implementation Details
 
 ![My Image](https://drive.google.com/uc?export=view&id=1_uEihOS6MS7LiL4i1eZU411t3WrOfUBN)
 
@@ -1300,7 +1284,7 @@ The implementation prioritizes **conceptual correctness**, **visual traceability
 
 ---
 
-## Architectural Approach
+### Architectural Approach
 
 The application is built as a **modular React interface** where each fetching concept is isolated into its own interactive view. Each view follows the same internal structure:
 
@@ -1315,7 +1299,7 @@ The application is built as a **modular React interface** where each fetching co
 
 ---
 
-## Unified Execution Model
+### Unified Execution Model
 
 All fetching approaches (Fetch, XMLHttpRequest, Promises, async/await, configured requests, parsing, error handling, and React’s `use()` hook) follow a shared execution model:
 
@@ -1328,7 +1312,7 @@ All fetching approaches (Fetch, XMLHttpRequest, Promises, async/await, configure
 This consistency makes differences between approaches **explicit rather than implicit**.
 
 
-## Interactive Comparison Design
+### Interactive Comparison Design
 
 Instead of static examples, the implementation uses **side-by-side execution** where applicable:
 
@@ -1341,7 +1325,7 @@ This design eliminates misleading comparisons and ensures that observed differen
 
 ---
 
-## State & Lifecycle Control
+### State & Lifecycle Control
 
  State is managed within each module to:
 
@@ -1354,7 +1338,7 @@ This aligns with the educational goal of exposing internal behavior rather than 
 
 ---
 
-## Error Handling Strategy
+### Error Handling Strategy
 
 Error handling is implemented explicitly rather than implicitly:
 
@@ -1367,7 +1351,7 @@ This mirrors real-world frontend constraints while keeping failure modes underst
 
 ---
 
-## React `use()` Hook Integration
+### React `use()` Hook Integration
 
 The `use()` hook example is implemented as an **experimental conceptual bridge**, not a replacement for data-fetching libraries.
 
@@ -1380,7 +1364,7 @@ The project intentionally avoids combining `use()` with caching layers to keep i
 
 ---
 
-## Visual Traceability
+### Visual Traceability
 
 Each module includes:
 - Step-based animated diagrams
@@ -1393,10 +1377,39 @@ This allows users to mentally map **code → request → response → UI** witho
 ---
 
 
-## Summary
+### Summary
 
 This implementation treats API fetching as a **system of behaviors**, not a single function call. By combining real network execution with controlled visualization, the project exposes the true complexity of frontend data fetching while remaining approachable and inspectable.
 
 The result is not a demo, but a **learning instrument**, one that prioritizes understanding over abstraction.
+
+---
+
+##  Setup Instructions
+
+Follow these steps to get the project running locally:
+
+### 1. Clone the repository
+Open your terminal and run the following command to clone the project:
+```bash
+git clone [https://github.com/moncefy/BUILD-IT-API-FETCHING.git](https://github.com/moncefy/BUILD-IT-API-FETCHING.git)
+```
+### 2. Navigate to the project folder
+```bash
+cd BUILD-IT-API-FETCHING
+```
+### 3. Install dependencies
+```bash
+npm install // When you run npm install , it looks at your package.json file and downloads every library listed there.
+```
+### 4. Start the development server
+```bash
+npm run dev 
+```
+### Or you can simply try the hosted version 
+```bash
+visit: https://build-it-api-fetching.netlify.app/
+```
+---
 
 
