@@ -5,6 +5,32 @@
 > **Goal:** Deep theoretical understanding of API fetching systems and how modern frontend applications handle data correctly, efficiently, and predictably
 
 ---
+##  Setup Instructions
+
+Follow these steps to get the project running locally:
+
+### 1. Clone the repository
+Open your terminal and run the following command to clone the project:
+```bash
+git clone [https://github.com/moncefy/BUILD-IT-API-FETCHING.git](https://github.com/moncefy/BUILD-IT-API-FETCHING.git)
+```
+### 2. Navigate to the project folder
+```bash
+cd BUILD-IT-API-FETCHING
+```
+### 3. Install dependencies
+```bash
+npm install
+```
+### 4. Start the development server
+```bash
+npm run dev 
+```
+### Or you can simply try the hosted version 
+```bash
+visit: https://build-it-api-fetching.netlify.app/
+```
+---
 
 ## Table of Contents
 - Introduction
@@ -1373,32 +1399,4 @@ This implementation treats API fetching as a **system of behaviors**, not a sing
 
 The result is not a demo, but a **learning instrument**, one that prioritizes understanding over abstraction.
 
----
-
-
-##  Setup Instructions
-
-Follow these steps to get the project running locally:
-
-### 1. Clone the repository
-Open your terminal and run the following command to clone the project:
-```bash
-git clone [https://github.com/moncefy/BUILD-IT-API-FETCHING.git](https://github.com/moncefy/BUILD-IT-API-FETCHING.git)
-```
-### 2. Navigate to the project folder
-```bash
-cd BUILD-IT-API-FETCHING
-```
-### 3. Install dependencies
-```bash
-npm install
-```
-### 4. Start the development server
-```bash
-npm run dev 
-```
-### Or you can simply try the hosted version 
-```bash
-visit: https://build-it-api-fetching.netlify.app/
-```
 
