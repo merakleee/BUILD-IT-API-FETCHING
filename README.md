@@ -20,7 +20,7 @@ cd BUILD-IT-API-FETCHING
 ```
 ### 3. Install dependencies
 ```bash
-npm install
+npm install // When you run npm install , it looks at your package.json file and downloads every library listed there.
 ```
 ### 4. Start the development server
 ```bash
