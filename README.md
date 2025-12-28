@@ -43,7 +43,7 @@
   - Polling & refetch intervals
   - Optimistic updates
   - Mutation handling & side effects
-
+- Implementation part
 ---
 
 ## Introduction
