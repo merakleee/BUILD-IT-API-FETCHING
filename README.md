@@ -829,9 +829,20 @@ sequenceDiagram
 
 #### Example for Race Condition (No Protection)
 ```js
+// Example for Race Condition (No Protection)
+
 async function searchUsers(query) {
+  // Send request to server with search query
   const response = await fetch(`/api/search?q=${query}`);
+  
+  // Wait for response and convert to JSON
   const data = await response.json();
+  
+  // Update UI with results
+  // ⚠️ PROBLEM: If user types fast, multiple requests are sent
+  // The LAST request sent might finish FIRST, showing wrong results
+  // Example: User types "cat" → searches "c", "ca", "cat"
+  // If "ca" finishes last, it overwrites "cat" results!
   setResults(data);
 }
 ```
@@ -840,7 +851,7 @@ async function searchUsers(query) {
 
 ### Request Cancellation with AbortController
 
-Cancellation is needed because it prevents outdated responses, avoids memory leaks and improves performance.
+One way to deal with race condition problems is by using Cancellation. It helps to prevents outdated responses, avoids memory leaks and improves performance.
 
 AbortController allows the frontend to cancel an in-flight request.
 
@@ -864,34 +875,45 @@ flowchart TD
     Abort --> Cancel
     Cancel --> UpdateUI
 ```
-
+```javascript
 #### Example Fixed with AbortController
-```js
-let controller;
+
+let controller; // Store the controller outside function to persist between calls
 
 async function searchUsers(query) {
-  // Cancel previous request
+  // Cancel previous request if it's still running
   if (controller) {
-    controller.abort();
+    controller.abort(); // Stop the old request
   }
-
+  
+  // Create a new controller for this request
   controller = new AbortController();
-
+  
   try {
     const response = await fetch(`/api/search?q=${query}`, {
-      signal: controller.signal
+      signal: controller.signal  // Attach signal to make request cancellable
     });
-
+    
     const data = await response.json();
-    setResults(data);
+    
+    // Only the most recent request will reach here
+    setResults(data); // ✅ Always shows correct results
+    
   } catch (error) {
+    // Aborted requests throw an error, but that's expected
     if (error.name !== "AbortError") {
+      // Only log real errors, not cancelled requests
       console.error("Request failed", error);
     }
   }
 }
-```
 
+// Now when user types "cat":
+// Types "c" → request sent
+// Types "ca" → "c" request CANCELLED, "ca" request sent
+// Types "cat" → "ca" request CANCELLED, "cat" request sent
+// ✅ Only "cat" results are shown!
+```
 ---
 
 ### Cleanup Logic (Component Unmount)
@@ -905,12 +927,21 @@ Always clean up: timers, subscriptions and requests.
 #### Pattern
 ```js
 useEffect(() => {
+  // Create a new AbortController for this effect
   const controller = new AbortController();
-
+  
+  // Make the fetch request with the abort signal attached
   fetch(url, { signal: controller.signal });
+  
+  // Cleanup function: runs when component unmounts or dependencies change
+  return () => controller.abort(); // Cancel the request if component unmounts
+  
+}, []); // Empty array = only run once when component mounts
 
-  return () => controller.abort();
-}, []);
+// ✅ Prevents memory leaks and errors when:
+// - User navigates away before request completes
+// - Component unmounts while fetching
+// - React runs cleanup during development (Strict Mode)
 ```
 
 ---
@@ -961,25 +992,33 @@ async function getProfile() {
 
 #### Example : Manual Stale Handling (Timestamp)
 ```js
-let lastFetchedAt = 0;
-const STALE_TIME = 10000; // 10 seconds
-let cachedProfile = null;
+let lastFetchedAt = 0;           // Timestamp of last successful fetch
+const STALE_TIME = 10000;        // 10 seconds (10,000 milliseconds)
+let cachedProfile = null;        // Store the profile data in memory
 
 async function getProfile() {
-  const now = Date.now();
-
+  const now = Date.now();        // Current timestamp in milliseconds
+  
+  // Check if cached data is still fresh (less than 10 seconds old)
   if (now - lastFetchedAt < STALE_TIME && cachedProfile) {
-    return cachedProfile;
+    return cachedProfile;        // ✅ Return cached data (no network request!)
   }
-
+  
+  // Cache is stale or empty, fetch fresh data
   const res = await fetch("/api/profile");
   const data = await res.json();
-
+  
+  // Update cache with fresh data
   cachedProfile = data;
-  lastFetchedAt = now;
-
+  lastFetchedAt = now;           // Record when we fetched
+  
   return data;
 }
+
+// Example usage:
+// Call 1: Fetches from server (0ms old)
+// Call 2 (5s later): Returns cached data ✅ (5000ms old, still fresh)
+// Call 3 (12s later): Fetches from server again ✅ (12000ms old, stale)
 ```
 
 - Data is reused while “fresh”
